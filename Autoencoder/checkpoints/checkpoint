@@ -1,0 +1,2 @@
+model_checkpoint_path: "/home/sls6964xx/Desktop/Brilliant-Recommendation-System/Autoencoder/checkpoints/model.ckpt"
+all_model_checkpoint_paths: "/home/sls6964xx/Desktop/Brilliant-Recommendation-System/Autoencoder/checkpoints/model.ckpt"
