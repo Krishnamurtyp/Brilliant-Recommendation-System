@@ -8,32 +8,18 @@ from PIL import Image
 from requests.exceptions import MissingSchema
 from default_promotion import promote
 from io import BytesIO
-from pymongo import MongoClient
-import os
 
 list_of_genres = ['animation', 'western', 'fantasy', 'thriller', 'drama', 'history', 'crime', 'comedy',
                           'tv movie', 'documentary', 'mystery', 'adventure', 'family', 'romance', 'action', 'horror',
                           'war', 'music', 'science fiction', 'foreign']
 
-# connect to the MongoDb cluster for predicted ranks
-MONGODB_URI = os.environ['MONGODB_URI']
-client = MongoClient(MONGODB_URI)
-db = client['MovieLens']
-TFIDF_collection = db['TFIDF']
-idf_collection = db['idf']
-user_profile_collection = db['user_profile']
-movie_profile_collection = db['movie_profile']
-
-# read from local
 movies = pd.read_csv('data/movies.csv')
 movies.drop_duplicates(inplace=True)
+df_predict = pd.read_csv('data/TFIDF.csv')
 ratings = pd.read_csv('data/ratings_small.csv')
-
-# read from mongo DB
-user_profile = pd.DataFrame(list(user_profile_collection.find()))
-TFIDF = pd.DataFrame(list(idf_collection.find()))
-movie_profile = pd.DataFrame(list(movie_profile_collection.find()))
-df_predict = pd.DataFrame(list(TFIDF_collection.find()))
+user_profile = pd.read_csv('data/user_profile.csv')
+TFIDF = pd.read_csv('data/idf.csv').set_index('movieId')
+movie_profile = pd.read_csv('data/movie_profile.csv')
 
 
 def recommender(user_no):
@@ -72,6 +58,9 @@ def display():
 
 
 # streamlit app design
+st.write("""
+(Buy me a coffee)[https://www.buymeacoffee.com/MemphisMeng] if you enjoy this app!
+""")
 st.header('Welcome to MovieLens Recommendation System!')
 st.sidebar.header('Please enter your User ID:')
 id_ = st.sidebar.number_input('Your ID')
@@ -115,7 +104,9 @@ if button:
 
             preference = pd.DataFrame(rates, index=[int(id_)]).T.sort_index(axis=0)
             test_list = np.dot(TFIDF, preference)
+            print(test_list.shape)
             movie_ranks = pd.DataFrame(data=test_list, index=movie_profile['movieId'].unique(), columns=[int(id_)])
+            print(movie_ranks)
             recommended_movies = pd.merge(movie_ranks, movies, left_on=movie_ranks.index, right_on='id') \
                                      .sort_values(by=int(id_), ascending=False, axis=0).iloc[0:10][['id', 'title']]
 
