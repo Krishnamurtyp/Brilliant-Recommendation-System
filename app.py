@@ -60,7 +60,7 @@ def display():
 
 # streamlit app design
 st.write("""
-(Buy me a coffee)[https://www.buymeacoffee.com/MemphisMeng] if you enjoy this app!
+[Buy me a coffee](https://www.buymeacoffee.com/MemphisMeng) if you enjoy this app!
 """)
 st.header('Welcome to MovieLens Recommendation System!')
 st.sidebar.header('Please enter your User ID:')
