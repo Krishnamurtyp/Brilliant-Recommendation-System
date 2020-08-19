@@ -13,6 +13,7 @@ list_of_genres = ['animation', 'western', 'fantasy', 'thriller', 'drama', 'histo
                           'tv movie', 'documentary', 'mystery', 'adventure', 'family', 'romance', 'action', 'horror',
                           'war', 'music', 'science fiction', 'foreign']
 
+# read from local
 movies = pd.read_csv('data/movies.csv')
 movies.drop_duplicates(inplace=True)
 df_predict = pd.read_csv('data/TFIDF.csv')
