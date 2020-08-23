@@ -8,11 +8,12 @@ from PIL import Image
 from requests.exceptions import MissingSchema
 from io import BytesIO
 import sqlalchemy
+import os
 
 list_of_genres = ['animation', 'western', 'fantasy', 'thriller', 'drama', 'history', 'crime', 'comedy',
                           'tv movie', 'documentary', 'mystery', 'adventure', 'family', 'romance', 'action', 'horror',
                           'war', 'music', 'science fiction', 'foreign']
-DATABASE_URL = 'mysql+pymysql://x6sqgn4tykzeqy5m:ubnd2hkpfg91y65b@nwhazdrp7hdpd4a4.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/qdaig9augsz5or1c'
+DATABASE_URL = os.environ['JAWSDB_URL']
 
 # read from local
 movies = pd.read_csv('data/movies.csv')

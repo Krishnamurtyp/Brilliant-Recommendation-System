@@ -7,7 +7,7 @@ import os
 
 warnings.filterwarnings('ignore')
 
-DATABASE_URL = 'mysql+pymysql://zcugd4i076rqn9rx:pqoiahtpry5uozp6@d6ybckq58s9ru745.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/qr9luv8vefanv3u5'
+DATABASE_URL = os.environ['JAWSDB_URL']
 engine = sqlalchemy.create_engine(DATABASE_URL)
 connection = engine.connect()
 
