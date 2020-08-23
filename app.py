@@ -119,7 +119,7 @@ if __name__ == '__main__':
 
             # default recommendation
             elif default == 'Yes':
-                recommended_movies = promote()
+                recommended_movies = pd.read_sql('SELECT * FROM qdaig9augsz5or1c.recommendation', connection)
 
             for i in range(10):
                 try:
