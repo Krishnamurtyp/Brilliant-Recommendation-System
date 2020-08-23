@@ -7,6 +7,7 @@ import requests
 from PIL import Image
 from requests.exceptions import MissingSchema
 from io import BytesIO
+from default_recommendation import promote
 import sqlalchemy
 import os
 
@@ -118,7 +119,7 @@ if __name__ == '__main__':
 
             # default recommendation
             elif default == 'Yes':
-                recommended_movies = pd.read_sql('SELECT * FROM qdaig9augsz5or1c.recommendation', connection)
+                recommended_movies = promote()
 
             for i in range(10):
                 try:
