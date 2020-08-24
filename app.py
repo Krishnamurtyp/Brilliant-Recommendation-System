@@ -7,7 +7,6 @@ import requests
 from PIL import Image
 from requests.exceptions import MissingSchema
 from io import BytesIO
-from default_recommendation import promote
 import sqlalchemy
 import os
 
